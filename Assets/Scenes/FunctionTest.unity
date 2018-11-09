@@ -179,6 +179,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &251529461 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 160596, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1576564503}
+--- !u!114 &251529462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 251529461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628962edf8bbef04bbfaca0e5e9871cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
 --- !u!1 &749610079 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 144230, guid: dc06161b6d97feb419f45f03b62e14b9,
@@ -195,10 +213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 628962edf8bbef04bbfaca0e5e9871cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trigger: 33
-  touchpad: 32
-  touchpad_L: {x: 0, y: 0}
-  touchpad_R: {x: 0, y: 0}
   leftHand: {fileID: 749610082}
   rightHand: {fileID: 1633777921}
 --- !u!114 &749610082 stripped
@@ -522,6 +536,10 @@ Prefab:
     - target: {fileID: 447954, guid: dc06161b6d97feb419f45f03b62e14b9, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11450312, guid: dc06161b6d97feb419f45f03b62e14b9, type: 2}
+      propertyPath: showDebugInteractables
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc06161b6d97feb419f45f03b62e14b9, type: 2}

@@ -6,34 +6,37 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
-public class HandsEvents : MonoBehaviour
+public class HandsInteraction : MonoBehaviour
 {
 
     //// Variable part ////
     private EVRButtonId trigger = EVRButtonId.k_EButton_SteamVR_Trigger;        // Trigger on VR controller
     private EVRButtonId touchpad = EVRButtonId.k_EButton_SteamVR_Touchpad;      // Touchpad on VR controller
-    public Hand leftHand;                                                       // Left-handed controller
-    public Hand rightHand;                                                      // Right-handed controller
+    private Hand hand;                                                          // The hand this script attached to
 
     // Initialization
     private void Start()
     {
-        
+        hand = GetComponent<Hand>();                                            // Get the Hand component
     }
 
     // For handling the triggers events (painting/drawing in the air like in Tilt Brush) by LineRenderer
     private void FixedUpdate()
     {
-        if (leftHand == null || !leftHand.isActiveAndEnabled)
+        if (hand == null)
         {
-            Debug.Log("Left controller has not been not initialized.");
-            return;
+            Debug.Log("The controller is not loaded.");
         }
 
-        if (rightHand == null || !rightHand.isActiveAndEnabled)
+        // If left hand
+        if (hand.handType == SteamVR_Input_Sources.LeftHand)
         {
-            Debug.Log("Right controller has not been not initialized.");
-            return;
+            
+        }
+        // If right hand
+        else if (hand.handType == SteamVR_Input_Sources.RightHand)
+        {
+
         }
 
         //////////////////////////////////////////////////////////
