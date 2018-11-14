@@ -34,6 +34,7 @@ public class HandsInteraction : MonoBehaviour
         else if (hand.handType == SteamVR_Input_Sources.RightHand)
         {
             // Select an object with HOMER technique
+
         }
     }
 }
