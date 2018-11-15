@@ -14,10 +14,17 @@ public class SelectWeapon : MonoBehaviour
     private SteamVR_Action_Boolean grabAction;                  // Grab action
     private bool isAttached = false;                            // Is a weapon attach to the hand?
     public float grabRange = 50f;                               // The range of the ray
+
+    [Tooltip("The flags used to attach this object to the hand.")]
+    public Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.DetachFromOtherHand | Hand.AttachmentFlags.TurnOnKinematic;
+
+    [Tooltip("The local point which acts as a positional and rotational offset to use while held")]
+    public Transform attachmentOffset;
+
     public Hand hand;                                           // The hand this script attached to
     public GameObject weapon;                                   // The weapon that the ray hit
 
-    // Call when the script is active
+    // Use this for initialization
     private void Start()
     {
         if (hand == null)
@@ -26,7 +33,7 @@ public class SelectWeapon : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         RaycastHit hitInfo;                                     // Information of the object hit by the raycast
 
@@ -41,7 +48,7 @@ public class SelectWeapon : MonoBehaviour
         if (hit)
         {
             //Debug.Log("Hit");
-            //Debug.DrawRay(hand.transform.position, hand.transform.forward);
+            Debug.DrawRay(hand.transform.position, hand.transform.forward);
 
             // If hit the weapon
             if (hitInfo.collider.gameObject.tag == "Weapon")
@@ -52,7 +59,7 @@ public class SelectWeapon : MonoBehaviour
                 // If the player press the trigger, attach the weapon to the player's right hand
                 if (getSelectWeapon())
                 {
-
+                    //Debug.Log("Trigger pressed");
                 }
             }
             else
@@ -62,6 +69,7 @@ public class SelectWeapon : MonoBehaviour
         }
     }
 
+    // If the player pressed the trigger, return true
     public bool getSelectWeapon()
     {
         return SteamVR_Input._default.inActions.SelectWeapon.GetStateDown(hand.handType);
