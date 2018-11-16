@@ -28,6 +28,10 @@ MonoBehaviour:
   - __actions_default_in_SkeletonLeftHand
   - __actions_default_in_SkeletonRightHand
   - __actions_default_in_Squeeze
+  - __actions_default_in_SelectWeapon
+  - __actions_default_in_TouchPad
+  - __actions_default_in_TouchPos
+  - __actions_default_in_ReleaseWeapon
   - __actions_default_out_Haptic
   - __actions_platformer_in_Move
   - __actions_platformer_in_Jump
@@ -44,6 +48,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b1134e8dcabcab84ab2bc9167ec714c4, type: 2}
   - {fileID: 11400000, guid: 1b770d431c8bc434aad401f54d00b6d6, type: 2}
   - {fileID: 11400000, guid: d6ed4ab18f6574649aa9fbbe35609d6b, type: 2}
+  - {fileID: 11400000, guid: ed58e03d70b8edc4083505c04025b82f, type: 2}
+  - {fileID: 11400000, guid: 7cb107be2d751624c922e005f37c5698, type: 2}
+  - {fileID: 11400000, guid: 25aca293d8dd0ec4492b3847eacdef9d, type: 2}
+  - {fileID: 11400000, guid: b566881760ff4ef43b81124bfe4c3fd7, type: 2}
   - {fileID: 11400000, guid: 947a5dd2f04edf94a8c09174e4585a30, type: 2}
   - {fileID: 11400000, guid: cb12eac21a3a6cf4b9fc64096563c28e, type: 2}
   - {fileID: 11400000, guid: 66d0d276eb31370438192274cd6afb48, type: 2}

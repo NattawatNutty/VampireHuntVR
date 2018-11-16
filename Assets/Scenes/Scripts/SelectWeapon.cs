@@ -1,4 +1,6 @@
-﻿﻿// Nattawat Puakpaiboon @Universität Bremen
+﻿// ITCS496
+// Team members
+// Nattawat         Puakpaiboon 5888158
 
 using System.Collections;
 using System.Collections.Generic;
@@ -9,67 +11,80 @@ using Valve.VR.InteractionSystem;
 public class SelectWeapon : MonoBehaviour
 {
     //// Variable part ////
-    private SteamVR_Action_Boolean grabAction;                  // Grab action
-    private Hand hand;                                          // The hand this script attached to
-    public GameObject weapon;                                   // The weapon that the ray hit
+    //private SteamVR_Action_Boolean grabAction;                                  // Grab action
+    public bool isAttached = false;                                             // Is a weapon attach to a hand?
+    public float grabRange = 50f;                                               // The range of the ray
+    public Hand hand;                                                           // The hand this script attached to
+    public GameObject weapon;                                                   // The current selected weapon
 
-    // Call when the script is active
-    private void OnEnable()
+    // Use this for initialization
+    private void Start()
     {
         if (hand == null)
         {
-            hand = GetComponent<Hand>();                         // Get the Hand component
+            hand = this.GetComponent<Hand>();                                   // Get the Hand component
         }
+    }
 
-        if (grabAction == null)
+    private void FixedUpdate()
+    {
+
+        // If the player press the grip while holding the weapon, detach the weapon
+        if (isAttached)
         {
-            Debug.LogError("No grab action assigned");
+            if (getReleaseWeapon())
+            {
+                //Debug.Log("Weapon released");
+                isAttached = false;
+                weapon.GetComponent<Rigidbody>().isKinematic = false;
+                weapon.GetComponent<Weapon>().isAttached = false;
+                weapon.transform.parent = null;                                 // Detach the object from the hand
+            }
             return;
         }
 
-        grabAction.AddOnChangeListener(OnGrabActionChange, hand.handType);
-    }
+        RaycastHit hitInfo;                                                     // Information of the object hit by the raycast
 
-    // Call when the script is inactive
-    private void OnDisable()
-    {
-        if (grabAction == null)
-        {
-            if (grabAction != null)
-                grabAction.RemoveOnChangeListener(OnGrabActionChange, hand.handType);
-        }
-    }
-
-    // When the user push the trigger
-    private void OnGrabActionChange(SteamVR_Action_In actionIn)
-    {
-        if (grabAction.GetStateDown(hand.handType))
-        {
-            Grab();
-        }
-    }
-
-    // Start doing grab action
-    public void Grab()
-    {
-        StartCoroutine(DoGrab());
-    }
-
-    // Perform grabbing action
-    private IEnumerator DoGrab()
-    {
-        RaycastHit hitInfo;                                 // Information from the raycast hitting that weapon
-        bool hit = Physics.Raycast(hand.transform.position, Vector3.forward, out hitInfo);
-        // If the raycast hit the weapon
+        // Check whether the raycast from the right controller hits a collider
+        bool hit = Physics.Raycast(hand.transform.position, hand.transform.forward, out hitInfo, grabRange);
+        // If the raycast hits something
         if (hit)
         {
-            weapon = hitInfo.collider.gameObject;           // Pass the detected game object to the  weapon variable
-        }
-        else
-        {
-            weapon = null;
-        }
+            //Debug.Log("Hit");
+            Debug.DrawRay(hand.transform.position, hand.transform.forward);
 
-        yield return null;
+            // If the raycast hit the weapon
+            if (hitInfo.collider.gameObject.tag == "Weapon")
+            {
+                //Debug.Log("Hit the weapon");
+                weapon = hitInfo.collider.gameObject;                           // Obtain the weapon game object
+
+                // If the player press the trigger, attach the weapon to the player's right hand
+                if (getSelectWeapon() && !isAttached)
+                {
+                    //Debug.Log("Weapon selected");
+                    isAttached = true;                                          // The player is holding the weapon, not allowing to carry another one
+                    weapon.GetComponent<Rigidbody>().isKinematic = true;        // Ignore the gravity
+                    weapon.GetComponent<Weapon>().isAttached = true;
+                    weapon.transform.position = transform.position;
+                    weapon.transform.rotation = transform.rotation;
+                    weapon.transform.parent = transform;                        // Set parent of the weapon to the hand
+                }
+            }
+            else
+            {
+                weapon = null;                                                  // Clear the weapon
+            }
+        }
+    }
+
+    public bool getSelectWeapon()
+    {
+        return SteamVR_Input._default.inActions.SelectWeapon.GetState(hand.handType);
+    }
+
+    public bool getReleaseWeapon()
+    {
+        return SteamVR_Input._default.inActions.ReleaseWeapon.GetStateDown(hand.handType);
     }
 }
