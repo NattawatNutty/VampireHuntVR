@@ -242,7 +242,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1755472667b81464ba07a76107222690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHit: 0
+  wasHit: 0
   isAttached: 0
+  hideHighlight: []
 --- !u!65 &747693685
 BoxCollider:
   m_ObjectHideFlags: 0

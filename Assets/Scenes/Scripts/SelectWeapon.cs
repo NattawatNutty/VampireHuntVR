@@ -36,9 +36,11 @@ public class SelectWeapon : MonoBehaviour
             {
                 //Debug.Log("Weapon released");
                 isAttached = false;
+                weapon.GetComponent<Weapon>().isHit = false;
                 weapon.GetComponent<Rigidbody>().isKinematic = false;
                 weapon.GetComponent<Weapon>().isAttached = false;
                 weapon.transform.parent = null;                                 // Detach the object from the hand
+                weapon = null;                                                  // Clear the weapon
             }
             return;
         }
@@ -58,6 +60,7 @@ public class SelectWeapon : MonoBehaviour
             {
                 //Debug.Log("Hit the weapon");
                 weapon = hitInfo.collider.gameObject;                           // Obtain the weapon game object
+                weapon.GetComponent<Weapon>().isHit = true;                     // The weapon is hit by the raycast
 
                 // If the player press the trigger, attach the weapon to the player's right hand
                 if (getSelectWeapon() && !isAttached)
@@ -73,6 +76,10 @@ public class SelectWeapon : MonoBehaviour
             }
             else
             {
+                if(weapon != null)
+                {
+                    weapon.GetComponent<Weapon>().isHit = false;                // Clear the hit flag
+                }
                 weapon = null;                                                  // Clear the weapon
             }
         }
