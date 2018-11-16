@@ -199,6 +199,18 @@ MonoBehaviour:
   hand: {fileID: 0}
   speed: 0
   a_jump: {fileID: 11400000, guid: 66d0d276eb31370438192274cd6afb48, type: 2}
+--- !u!114 &337015999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 337015997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e2dd947a9204bb48bbd4e1b946c43f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 0}
 --- !u!114 &337016001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,9 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 628962edf8bbef04bbfaca0e5e9871cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttached: 0
   grabRange: 100
-  attachmentFlags: 44
-  attachmentOffset: {fileID: 0}
   hand: {fileID: 0}
   weapon: {fileID: 0}
 --- !u!1 &747693678 stripped
@@ -575,6 +586,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 107946, guid: dc06161b6d97feb419f45f03b62e14b9,
     type: 2}
   m_PrefabInternal: {fileID: 1613318413}
+--- !u!1 &1921075566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 144230, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1613318413}
+--- !u!114 &1921075567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1921075566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e2dd947a9204bb48bbd4e1b946c43f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 0}
 --- !u!1001 &2050343550
 Prefab:
   m_ObjectHideFlags: 0

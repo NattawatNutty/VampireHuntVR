@@ -40,5 +40,7 @@ namespace Valve.VR
         public Valve.VR.SteamVR_Action_Vector2 TouchPos;
         
         public Valve.VR.SteamVR_Action_Boolean ReleaseWeapon;
+        
+        public Valve.VR.SteamVR_Action_Boolean Shoot;
     }
 }
