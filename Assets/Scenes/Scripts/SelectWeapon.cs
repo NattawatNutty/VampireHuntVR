@@ -28,6 +28,21 @@ public class SelectWeapon : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        // If the player press the grip while holding the weapon, detach the weapon
+        if (isAttached)
+        {
+            if (getReleaseWeapon())
+            {
+                //Debug.Log("Weapon released");
+                isAttached = false;
+                weapon.GetComponent<Rigidbody>().isKinematic = false;
+                weapon.GetComponent<Weapon>().isAttached = false;
+                weapon.transform.parent = null;                                 // Detach the object from the hand
+            }
+            return;
+        }
+
         RaycastHit hitInfo;                                                     // Information of the object hit by the raycast
 
         // Check whether the raycast from the right controller hits a collider
@@ -48,24 +63,16 @@ public class SelectWeapon : MonoBehaviour
                 if (getSelectWeapon() && !isAttached)
                 {
                     //Debug.Log("Weapon selected");
-                    isAttached = true;
+                    isAttached = true;                                          // The player is holding the weapon, not allowing to carry another one
                     weapon.GetComponent<Rigidbody>().isKinematic = true;        // Ignore the gravity
+                    weapon.GetComponent<Weapon>().isAttached = true;
                     weapon.transform.position = transform.position;
                     weapon.transform.rotation = transform.rotation;
                     weapon.transform.parent = transform;                        // Set parent of the weapon to the hand
                 }
-                // If the player press the grip while holding the weapon, detach the weapon
-                else if (getReleaseWeapon() && isAttached)
-                {
-                    //Debug.Log("Weapon released");
-                    isAttached = false;
-                    weapon.GetComponent<Rigidbody>().isKinematic = false;
-                    weapon.transform.parent = null;                             // Detach the object from the hand
-                }
             }
             else
             {
-                isAttached = false;
                 weapon = null;                                                  // Clear the weapon
             }
         }
