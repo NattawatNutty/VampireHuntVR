@@ -38,5 +38,7 @@ namespace Valve.VR
         public Valve.VR.SteamVR_Action_Boolean TouchPad;
         
         public Valve.VR.SteamVR_Action_Vector2 TouchPos;
+        
+        public Valve.VR.SteamVR_Action_Boolean ReleaseWeapon;
     }
 }
