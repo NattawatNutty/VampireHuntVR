@@ -23,15 +23,20 @@ public class Weapon : MonoBehaviour
     public bool wasHit = false;                                 // Is this weapon hit by the raycast?
     public bool isAttached = false;                             // Is this weapon attached to any hand?
 
+    public int maxAmmo;                                         // Maximum (default) ammo of the weapon
+    public int remainingAmmo;                                   // Remaining ammo of the weapon
+
     [Tooltip("An array of child gameObjects to not render a highlight for. Things like transparent parts, vfx, etc.")]
     public GameObject[] hideHighlight;
 
     // Use this for initialization
     void Start () {
         tag = "Weapon";
-        outline = (Material)Resources.Load("SteamVR_HoverHighlight", typeof(Material));
+        remainingAmmo = maxAmmo;
+        //outline = (Material)Resources.Load("SteamVR_HoverHighlight", typeof(Material));
     }
 
+    /*
     private bool ShouldIgnoreHighlight(Component component)
     {
         return ShouldIgnore(component.gameObject);
@@ -164,9 +169,11 @@ public class Weapon : MonoBehaviour
         }
         isHit = true;
     }
+    */
 
     // Update is called once per frame
     void Update () {
+        /*
         wasHit = isHit;
 
         UpdateHighlightRenderers();
@@ -175,5 +182,6 @@ public class Weapon : MonoBehaviour
             Destroy(highlightHolder);
 
         isHit = false;
+        */
     }
 }
