@@ -453,6 +453,7 @@ GameObject:
   - component: {fileID: 1400164170}
   - component: {fileID: 1400164169}
   - component: {fileID: 1400164172}
+  - component: {fileID: 1400164173}
   m_Layer: 26
   m_Name: DummyTarget
   m_TagString: Enemy
@@ -542,6 +543,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1400164173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1400164167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da1cbc75285c3454d872d4447a406053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  currentHP: 0
+  speed: 10
+  damage: 15
 --- !u!1001 &1613318413
 Prefab:
   m_ObjectHideFlags: 0
