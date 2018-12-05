@@ -59,7 +59,7 @@ public class SelectWeapon : MonoBehaviour
             //Debug.Log("Hit");
 
             // If the raycast hit the weapon
-            if (hitInfo.collider.gameObject.tag == "Weapon" && hitInfo.collider.gameObject.GetComponent<Weapon>().remainingAmmo > 0)
+            if (hitInfo.collider.gameObject.tag == "Weapon" && hitInfo.collider.gameObject.GetComponent<Weapon>().isPickable)
             {
                 //Debug.Log("Hit the weapon");
                 weapon = hitInfo.collider.gameObject;                           // Obtain the weapon game object
@@ -74,7 +74,7 @@ public class SelectWeapon : MonoBehaviour
                 raySelect.SetPosition(1, transform.position + transform.forward * lineDistance);
 
                 // If the player press the trigger, attach the weapon to the player's right hand
-                if (getSelectWeapon() && !isAttached)
+                if (getSelectWeaponDown() && !isAttached)
                 {
                     //Debug.Log("Weapon selected");
                     isAttached = true;                                          // The player is holding the weapon, not allowing to carry another one
@@ -98,9 +98,9 @@ public class SelectWeapon : MonoBehaviour
         }
     }
 
-    public bool getSelectWeapon()
+    public bool getSelectWeaponDown()
     {
-        return SteamVR_Input._default.inActions.SelectWeapon.GetState(hand.handType);
+        return SteamVR_Input._default.inActions.SelectWeapon.GetStateDown(hand.handType);
     }
 
     public bool getReleaseWeapon()

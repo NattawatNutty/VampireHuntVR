@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Valve.VR;
-using Valve.VR.InteractionSystem;
 using UnityEngine;
 
 // The required scripts for weapon
@@ -21,9 +19,16 @@ public class Weapon : MonoBehaviour
 
     public bool isHit = false;                                  // Is this weapon hit by the raycast?
     public bool isAttached = false;                             // Is this weapon attached to any hand?
+    public bool isPickable = true;                              // Is this weapon pickable?
 
     public int maxAmmo;                                         // Maximum (default) ammo of the weapon
     public int remainingAmmo;                                   // Remaining ammo of the weapon
+    public int damage;                                          // Damage per bullet hit the enemies from the weapon
+    public float fireRate;                                      // Fire rate of the weapon in second
+    public float velocity;                                      // Velocity of each bullet shot
+
+    public GameObject bulletPrefab;                             // Bullet prefab
+    public Transform bulletPos;                                 // Bullet position
 
     [Tooltip("An array of child gameObjects to not render a highlight for. Things like transparent parts, vfx, etc.")]
     public GameObject[] hideHighlight;
@@ -182,5 +187,8 @@ public class Weapon : MonoBehaviour
 
         isHit = false;
         */
+
+        if (remainingAmmo <= 0)
+            isPickable = false;
     }
 }
