@@ -20,7 +20,6 @@ public class Weapon : MonoBehaviour
     private SkinnedMeshRenderer[] existingSkinnedRenderers;
 
     public bool isHit = false;                                  // Is this weapon hit by the raycast?
-    public bool wasHit = false;                                 // Is this weapon hit by the raycast?
     public bool isAttached = false;                             // Is this weapon attached to any hand?
 
     public int maxAmmo;                                         // Maximum (default) ammo of the weapon
