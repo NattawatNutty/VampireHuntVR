@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-
     //public int timeLeft = 60; //เอาไว้นับเวลาถอยหลัง เริ่มที่ 5 วิ
     //public Text Timertext;   //เอาไว้เก็บเวลานับถอยหลัง
     //public string sceneName; //เอาไว้เห็บชื่อ scene 

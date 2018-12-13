@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
     private SkinnedMeshRenderer[] highlightSkinnedRenderers;
     private SkinnedMeshRenderer[] existingSkinnedRenderers;
 
-    public bool isHit = false;                                  // Is this weapon hit by the raycast?
+    public bool isHitByRaycast = false;                         // Is this weapon hit by the raycast?
     public bool isAttached = false;                             // Is this weapon attached to any hand?
     public bool isPickable = true;                              // Is this weapon pickable?
 

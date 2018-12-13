@@ -123,6 +123,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4668811464268774, guid: cb96e00923d9e6446bca404181c6b650,
     type: 2}
   m_PrefabInternal: {fileID: 1027901817}
+--- !u!114 &165230389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 165230387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32cc10a1e5d18a548ba68fcf4bc9587d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponInfo: {fileID: 0}
+  damage: 0
 --- !u!54 &165230392
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -268,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1755472667b81464ba07a76107222690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHit: 0
+  isHitByRaycast: 0
   isAttached: 0
   isPickable: 1
   maxAmmo: 10
@@ -364,8 +377,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1758198535960678, guid: cb96e00923d9e6446bca404181c6b650, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23496709051010452, guid: cb96e00923d9e6446bca404181c6b650,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fa5c2d4a8ddcd314eb27d2ba132bfa27, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb96e00923d9e6446bca404181c6b650, type: 2}
   m_IsPrefabAsset: 0
@@ -815,23 +833,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1921075566 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 144230, guid: dc06161b6d97feb419f45f03b62e14b9,
-    type: 2}
-  m_PrefabInternal: {fileID: 1613318413}
---- !u!114 &1921075567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1921075566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e2dd947a9204bb48bbd4e1b946c43f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hand: {fileID: 0}
 --- !u!1001 &2050343550
 Prefab:
   m_ObjectHideFlags: 0

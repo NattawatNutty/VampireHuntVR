@@ -4,11 +4,11 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
+public class Shooter : MonoBehaviour
+{
+    // Attach this script to right hand VR controller
 
-
-public class Shooter : MonoBehaviour {
-
-    // Use this for initialization
+    //// Variable part ////
     public Hand hand;
     private float lastShot = 0f;                                                // The last shot of the weapon for fire rate counting
 
@@ -23,7 +23,7 @@ public class Shooter : MonoBehaviour {
     private void FixedUpdate()
     {
         // Check whether the user has obtained a weapon in hand
-        if (gameObject.GetComponent<SelectWeapon>().isAttached)
+        if (GetComponent<SelectWeapon>().isAttached)
         {
             // Get weapon information
             GameObject weapon = GetComponent<SelectWeapon>().weapon;
@@ -54,4 +54,5 @@ public class Shooter : MonoBehaviour {
     {
         return SteamVR_Input._default.inActions.Shoot.GetState(hand.handType);
     }
+
 }

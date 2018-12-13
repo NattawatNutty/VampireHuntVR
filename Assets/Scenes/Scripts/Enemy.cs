@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
-
+public class Enemy : MonoBehaviour
+{
     //// Variable part ////
     public int maxHP;                       // maximum HP of the enemy
     public int currentHP;                   // Current HP of the enemy
@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		
+		if(currentHP <= 0) {
+            Destroy(gameObject);
+        }
 	}
 }

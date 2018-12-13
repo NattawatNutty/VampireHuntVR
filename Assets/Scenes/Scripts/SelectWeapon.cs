@@ -10,6 +10,8 @@ using Valve.VR.InteractionSystem;
 
 public class SelectWeapon : MonoBehaviour
 {
+    // Attach this script to right hand VR controller
+
     //// Variable part ////
     //private SteamVR_Action_Boolean grabAction;                                  // Grab action
     private float rayWidth = 0.05f;                                             // The width of the ray
@@ -31,7 +33,6 @@ public class SelectWeapon : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         // If the player press the grip while holding the weapon, detach the weapon
         if (isAttached)
         {
@@ -39,7 +40,7 @@ public class SelectWeapon : MonoBehaviour
             {
                 //Debug.Log("Weapon released");
                 isAttached = false;
-                weapon.GetComponent<Weapon>().isHit = false;
+                weapon.GetComponent<Weapon>().isHitByRaycast = false;
                 weapon.GetComponent<Rigidbody>().isKinematic = false;
                 weapon.GetComponent<Weapon>().isAttached = false;
                 weapon.transform.parent = null;                                 // Detach the object from the hand
@@ -64,7 +65,7 @@ public class SelectWeapon : MonoBehaviour
                 //Debug.Log("Hit the weapon");
                 weapon = hitInfo.collider.gameObject;                           // Obtain the weapon game object
                 var lineDistance = Vector3.Distance(transform.position, weapon.transform.position);
-                weapon.GetComponent<Weapon>().isHit = true;                     // The weapon is hit by the raycast
+                weapon.GetComponent<Weapon>().isHitByRaycast = true;            // The weapon is hit by the raycast
 
                 // Set the ray casting from the controller to the weapon
                 raySelect.enabled = true;
@@ -90,7 +91,7 @@ public class SelectWeapon : MonoBehaviour
             {
                 if(weapon != null)
                 {
-                    weapon.GetComponent<Weapon>().isHit = false;                // Clear the hit flag
+                    weapon.GetComponent<Weapon>().isHitByRaycast = false;       // Clear the hit flag
                 }
                 raySelect.enabled = false;
                 weapon = null;                                                  // Clear the weapon
