@@ -54,5 +54,4 @@ public class Shooter : MonoBehaviour
     {
         return SteamVR_Input._default.inActions.Shoot.GetState(hand.handType);
     }
-
 }

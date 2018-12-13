@@ -42,9 +42,6 @@ public class Timer : MonoBehaviour
         string sec = (t % 60).ToString("f0");  //bugggg มันมี 60 วินาที ควรจะขึ้นแต่ 59 วิ
 
         timerText.text = min + ":" + sec;
-
-        
-
     }
 
     ////เอาไว้นับเวลาถอยหลัง
