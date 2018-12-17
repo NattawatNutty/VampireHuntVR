@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    //// Variable part ////
+    // Variable part //
     private const string OutlineWidthKey = "Outline";
     private const float OutlineWidthValue = 0.05f;              // Width of the outline
     private Material outline;                                   // Outline material

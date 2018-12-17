@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
-    //// Variable part ////
+
+    // Variable part //
     public bool isHit = false;                  // Check whether the bullet hit something
     public Weapon weaponInfo;                   // Weapon information
     public int damage;                          // Damage of each bullet

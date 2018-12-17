@@ -8,7 +8,7 @@ public class Shooter : MonoBehaviour
 {
     // Attach this script to right hand VR controller
 
-    //// Variable part ////
+    // Variable part //
     public Hand hand;
     private float lastShot = 0f;                                                // The last shot of the weapon for fire rate counting
 

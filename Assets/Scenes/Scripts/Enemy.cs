@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    //// Variable part ////
+    // Variable part //
     public int maxHP;                       // maximum HP of the enemy
     public int currentHP;                   // Current HP of the enemy
     public int speed;                       // Movement speed of the enemy

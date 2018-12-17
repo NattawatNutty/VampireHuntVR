@@ -12,8 +12,7 @@ public class SelectWeapon : MonoBehaviour
 {
     // Attach this script to right hand VR controller
 
-    //// Variable part ////
-    //private SteamVR_Action_Boolean grabAction;                                  // Grab action
+    // Variable part //
     private float rayWidth = 0.05f;                                             // The width of the ray
     public LineRenderer raySelect;                                              // LineRenderer for casting the ray
     public bool isAttached = false;                                             // Is a weapon attach to a hand?
