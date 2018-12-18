@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIInfo : MonoBehaviour {
+public class PlayerUI : MonoBehaviour {
 
     // Variable Part //
     public float maxHealth = 100f;                                          // Maximum health point of the player

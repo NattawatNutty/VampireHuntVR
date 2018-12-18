@@ -4,6 +4,9 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
+// The required scripts for weapon
+[RequireComponent(typeof(SelectWeapon))]
+
 public class Shooter : MonoBehaviour
 {
     // Attach this script to right hand VR controller

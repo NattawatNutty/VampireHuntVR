@@ -26,12 +26,6 @@ public class CharacterMovement : MonoBehaviour {
         {
             hand = this.GetComponent<Hand>();                                   // Get the Hand component
         }
-
-        if (touchpadCoor == null)
-        {
-            Debug.LogError("No touch pad coordinate.");
-            return;
-        }
     }
 
     private void FixedUpdate()
