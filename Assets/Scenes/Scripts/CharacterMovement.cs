@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour {
 
+    // Attach this script to right hand VR controller
+
     // Variable part //
     public GameObject player;
     private SteamVR_Action_Vector2 touchpadCoor;                                // Touchpad action
@@ -13,7 +15,7 @@ public class CharacterMovement : MonoBehaviour {
     
     
     public Hand hand;                                                           // The hand this script attached to
-    public float speed;                                                         // Speed of the movement range [0.0, 1.0]
+    //public float speed;                                                         // Speed of the movement range [0.0, 1.0]
 
     [SteamVR_DefaultAction("Jump", "platformer")]
     public SteamVR_Action_Boolean a_jump;

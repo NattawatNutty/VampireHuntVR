@@ -45,6 +45,7 @@ public class Bullet : MonoBehaviour {
         // When bullet hits other things or hits the same enemy again (bouncing), the damage will be null
         else if (target.tag != "Enemy" && isHit) {
             damage = 0;
+            
         }
     }
 }

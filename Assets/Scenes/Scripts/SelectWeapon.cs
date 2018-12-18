@@ -13,7 +13,7 @@ public class SelectWeapon : MonoBehaviour
     // Attach this script to right hand VR controller
 
     // Variable part //
-    private float rayWidth = 0.05f;                                             // The width of the ray
+    private float rayWidth = 0.01f;                                             // The width of the ray
     public LineRenderer raySelect;                                              // LineRenderer for casting the ray
     public bool isAttached = false;                                             // Is a weapon attach to a hand?
     public float grabRange = 50f;                                               // The range of the ray
@@ -63,7 +63,7 @@ public class SelectWeapon : MonoBehaviour
             {
                 //Debug.Log("Hit the weapon");
                 weapon = hitInfo.collider.gameObject;                           // Obtain the weapon game object
-                var lineDistance = Vector3.Distance(transform.position, weapon.transform.position);
+                float lineDistance = Vector3.Distance(transform.position, weapon.transform.position);
                 weapon.GetComponent<Weapon>().isHitByRaycast = true;            // The weapon is hit by the raycast
 
                 // Set the ray casting from the controller to the weapon

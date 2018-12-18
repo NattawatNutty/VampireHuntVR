@@ -188,7 +188,9 @@ public class Weapon : MonoBehaviour
         isHit = false;
         */
 
-        if (remainingAmmo <= 0)
+        if (remainingAmmo <= 0) {
             isPickable = false;
+            Destroy(gameObject, 5);
+        }
     }
 }

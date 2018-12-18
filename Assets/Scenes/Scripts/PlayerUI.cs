@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour {
 
+    // Attach this script to the player
+
     // Variable Part //
+    public bool gameplayMode;
+
     public float maxHealth = 100f;                                          // Maximum health point of the player
     public float currentHP;                                                 // Current health point of the player
     public Image healthBar;                                                 // Health bar indicating current HP of the player
@@ -32,6 +36,13 @@ public class PlayerUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // Mode update //
+        if(gameObject.GetComponent<PlayerUI>().enabled == true) {
+            gameplayMode = true;
+        } else {
+            gameplayMode = false;
+        }
+
         // Player health update //
         //healthBar.fillAmount = health / maxHealth;
 
