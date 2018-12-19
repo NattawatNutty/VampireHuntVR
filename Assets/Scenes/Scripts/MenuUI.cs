@@ -20,7 +20,7 @@ public class MenuUI : MonoBehaviour {
     public LineRenderer raySelect;                                              // LineRenderer for casting the ray
     public float grabRange = 50f;                                               // The range of the ray
     public Hand hand;                                                           // The hand this script attached to
-    public bool gameplayMode;
+    public static bool gameplayMode = false;
     public bool isPause = false;
 
     public GameObject hitObject;                                                // The game object that the raycast from the controller hit
@@ -42,19 +42,29 @@ public class MenuUI : MonoBehaviour {
             hand = this.GetComponent<Hand>();                                   // Get the Hand component
         }
 
-        // Disable the scripts involving with the gameplay until the player begins to play
-        hand.GetComponent<SelectWeapon>().enabled = false;
-        hand.GetComponent<CharacterMovement>().enabled = false;
-        hand.GetComponent<Shooter>().enabled = false;
+        if (gameplayMode) {
+            // Enable the scripts involving with the gameplay
+            hand.GetComponent<SelectWeapon>().enabled = true;
+            hand.GetComponent<CharacterMovement>().enabled = true;
+            hand.GetComponent<Shooter>().enabled = true;
 
-        playerUI.SetActive(false);
+            playerUI.SetActive(true);
+        }
+        else if (!gameplayMode) {
+            // Disable the scripts involving with the gameplay until the player begins to play
+            hand.GetComponent<SelectWeapon>().enabled = false;
+            hand.GetComponent<CharacterMovement>().enabled = false;
+            hand.GetComponent<Shooter>().enabled = false;
+
+            playerUI.SetActive(false);
+        }
+
         techniqueText.text = homerTech;
         raySelect.enabled = false;
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        gameplayMode = transform.root.gameObject.GetComponent<PlayerUI>().gameplayMode;
         // Handle raycast laser for the menu UI
         RayCastHandler();
 
@@ -71,15 +81,7 @@ public class MenuUI : MonoBehaviour {
             playerUI.SetActive(false);
         }
         else if (GetPauseDown() && isPause) {
-            isPause = false;
-            pauseMenu.SetActive(false);
-
-            // Enable the scripts involving with the gameplay
-            hand.GetComponent<SelectWeapon>().enabled = true;
-            hand.GetComponent<CharacterMovement>().enabled = true;
-            hand.GetComponent<Shooter>().enabled = true;
-
-            playerUI.SetActive(true);
+            ResumeGame();
         }
 
         if (button != null) {
@@ -91,6 +93,7 @@ public class MenuUI : MonoBehaviour {
             // Proceed to play tutorial
             else if (GetInteractUIDown() && button.name == "Play tutorial") {
                 startMenu.SetActive(false);
+                gameplayMode = true;
 
                 // Enable the scripts involving with the gameplay
                 hand.GetComponent<SelectWeapon>().enabled = true;
@@ -102,12 +105,21 @@ public class MenuUI : MonoBehaviour {
             // Proceed to the village scene
             else if (GetInteractUIDown() && button.name == "Skip") {
                 startMenu.SetActive(false);
+                gameplayMode = true;
                 SceneManager.LoadScene("Village");
             }
-            // Select 'Option' menu
-            else if (GetInteractUIDown() && button.name == "Option") {
+            else if (GetInteractUIDown() && button.name == "Resume" && isPause) {
+                ResumeGame();
+            }
+            // Select 'Option' menu from main menu
+            else if (GetInteractUIDown() && button.name == "Option" && !gameplayMode) {
                 optionMenu.SetActive(true);
                 mainMenu.SetActive(false);
+            }
+            // Select 'Option' menu from game play mode
+            else if (GetInteractUIDown() && button.name == "Option" && gameplayMode) {
+                optionMenu.SetActive(true);
+                pauseMenu.SetActive(false);
             }
             // Select 'Technique' button
             else if (GetInteractUIDown() && button.name == "Technique") {
@@ -122,9 +134,14 @@ public class MenuUI : MonoBehaviour {
                     hand.GetComponent<SelectWeapon>().isSimRaycast = false;
                 }
             }
-            // Back to main menu
-            else if (GetInteractUIDown() && button.name == "Back") {
+            // Back to main menu when the player has not started played game yet
+            else if (GetInteractUIDown() && button.name == "Back" && !gameplayMode) {
                 mainMenu.SetActive(true);
+                optionMenu.SetActive(false);
+            }
+            // Back to pause menu from game play mode
+            else if (GetInteractUIDown() && button.name == "Back" && gameplayMode) {
+                pauseMenu.SetActive(true);
                 optionMenu.SetActive(false);
             }
             // Select 'Exit'
@@ -176,5 +193,17 @@ public class MenuUI : MonoBehaviour {
 
     public bool GetPauseDown() {
         return SteamVR_Input._default.inActions.Pause.GetStateDown(hand.handType);
+    }
+
+    private void ResumeGame() {
+        isPause = false;
+        pauseMenu.SetActive(false);
+
+        // Enable the scripts involving with the gameplay
+        hand.GetComponent<SelectWeapon>().enabled = true;
+        hand.GetComponent<CharacterMovement>().enabled = true;
+        hand.GetComponent<Shooter>().enabled = true;
+
+        playerUI.SetActive(true);
     }
 }

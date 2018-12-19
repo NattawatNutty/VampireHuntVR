@@ -192,7 +192,6 @@ public class Weapon : MonoBehaviour
 
         if (remainingAmmo <= 0) {
             isPickable = false;
-            Destroy(gameObject, 5);
         }
     }
 }

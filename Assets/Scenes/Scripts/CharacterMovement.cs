@@ -12,14 +12,12 @@ public class CharacterMovement : MonoBehaviour {
     public GameObject player;
     private SteamVR_Action_Vector2 touchpadCoor;                                // Touchpad action
     private Vector3 movement;                                                   // Movement of the player according to the touch pad position
-    
-    
     public Hand hand;                                                           // The hand this script attached to
     //public float speed;                                                         // Speed of the movement range [0.0, 1.0]
 
     [SteamVR_DefaultAction("Jump", "platformer")]
     public SteamVR_Action_Boolean a_jump;
-    private bool jump;                                                          // Is the player jump?
+    //private bool jump;                                                          // Is the player jump?
 
     // Call when the script is active
     private void Start()
@@ -36,7 +34,7 @@ public class CharacterMovement : MonoBehaviour {
         touchpadCoor = SteamVR_Input._default.inActions.TouchPos;
         // Touch pad position
         Vector2 touchPos = touchpadCoor.GetAxis(hand.handType);
-        Vector2 touchPosRescaled = new Vector2(touchPos.x / 20f, touchPos.y / 20f);
+        Vector2 touchPosRescaled = new Vector2(touchPos.x / 5f, touchPos.y / 5f);
         Debug.Log(touchPosRescaled);
 
         //if(touchPosRescaled.x)
@@ -44,6 +42,6 @@ public class CharacterMovement : MonoBehaviour {
         player.transform.position += movement;                                  // Change the position of the player according to the touch pad position
 
         // Touchpad press from the player
-        jump = a_jump.GetStateDown(hand.handType);                              // Jump when the player press the touchpad
+        //jump = a_jump.GetStateDown(hand.handType);                              // Jump when the player press the touchpad
     }
 }
