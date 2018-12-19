@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// The required scripts for weapon
+[RequireComponent(typeof(Rigidbody))]
+
 public class Bullet : MonoBehaviour {
+
+    // Attach this script to bullet (must have weapon as the parent)
 
     // Variable part //
     public bool isHit = false;                  // Check whether the bullet hit something

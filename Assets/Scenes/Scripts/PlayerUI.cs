@@ -37,6 +37,7 @@ public class PlayerUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // Mode update //
+        // * Need fix * //
         if(gameObject.GetComponent<PlayerUI>().enabled == true) {
             gameplayMode = true;
         } else {
@@ -62,11 +63,12 @@ public class PlayerUI : MonoBehaviour {
         if (selectInfo != null && isAttached) {
             Weapon weapon = selectInfo.weapon.GetComponent<Weapon>();       // Get weapon information
 
+            // Set no weapon text invisible
+            noWeaponText.gameObject.SetActive(false);
             // Set ammo indication UI active
             maxAmmoText.gameObject.SetActive(true);
             remainingAmmoText.gameObject.SetActive(true);
-            // Set no weapon text invisible
-            noWeaponText.gameObject.SetActive(false);
+            
             maxAmmoText.text = weapon.maxAmmo.ToString();                   // Pass the maximum ammo to the text UI
             remainingAmmoText.text = weapon.remainingAmmo.ToString();       // Pass the remaining ammo to the text UI
         } else {

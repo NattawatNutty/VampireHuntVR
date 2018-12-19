@@ -42,5 +42,7 @@ namespace Valve.VR
         public Valve.VR.SteamVR_Action_Boolean ReleaseWeapon;
         
         public Valve.VR.SteamVR_Action_Boolean Shoot;
+        
+        public Valve.VR.SteamVR_Action_Boolean Pause;
     }
 }

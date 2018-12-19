@@ -56,6 +56,10 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/Pause",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
@@ -136,7 +140,8 @@
       "/actions/default/in/TouchPad": "Touchpad",
       "/actions/default/in/TouchPos": "TouchPos",
       "/actions/default/in/ReleaseWeapon": "ReleaseWeapon",
-      "/actions/default/in/Shoot": "Shoot"
+      "/actions/default/in/Shoot": "Shoot",
+      "/actions/default/in/Pause": "Pause"
     }
   ]
 }

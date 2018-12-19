@@ -16,6 +16,8 @@ public class SelectWeapon : MonoBehaviour
     private float rayWidth = 0.01f;                                             // The width of the ray
     public LineRenderer raySelect;                                              // LineRenderer for casting the ray
     public bool isAttached = false;                                             // Is a weapon attach to a hand?
+    public bool isHOMER = true;
+    public bool isSimRaycast = false;
     public float grabRange = 50f;                                               // The range of the ray
     public Hand hand;                                                           // The hand this script attached to
     public GameObject weapon;                                                   // The current selected weapon
@@ -52,7 +54,7 @@ public class SelectWeapon : MonoBehaviour
 
         // Check whether the raycast from the right controller hits a collider
         bool hit = Physics.Raycast(hand.transform.position, hand.transform.forward, out hitInfo, grabRange);
-        Debug.DrawRay(hand.transform.position, hand.transform.forward);
+
         // If the raycast hits something
         if (hit)
         {
@@ -74,9 +76,9 @@ public class SelectWeapon : MonoBehaviour
                 raySelect.SetPosition(1, transform.position + transform.forward * lineDistance);
 
                 // If the player press the trigger, attach the weapon to the player's right hand
-                if (getSelectWeaponDown() && !isAttached)
+                // HOMER technique //
+                if (getSelectWeaponDown() && !isAttached && isHOMER)
                 {
-                    //Debug.Log("Weapon selected");
                     isAttached = true;                                          // The player is holding the weapon, not allowing to carry another one
                     raySelect.enabled = false;
                     weapon.GetComponent<Rigidbody>().isKinematic = true;        // Ignore the gravity
@@ -84,6 +86,12 @@ public class SelectWeapon : MonoBehaviour
                     weapon.transform.position = transform.position;
                     weapon.transform.rotation = transform.rotation;
                     weapon.transform.parent = transform;                        // Set parent of the weapon to the hand
+                }
+                // Simple raycast technique //
+                else if (getSelectWeaponDown() && !isAttached && isSimRaycast) {
+                    isAttached = true;                                          // The player is holding the weapon, not allowing to carry another one
+                    weapon.GetComponent<Rigidbody>().isKinematic = true;        // Ignore the gravity
+                    weapon.GetComponent<Weapon>().isAttached = true;
                 }
             }
             else
