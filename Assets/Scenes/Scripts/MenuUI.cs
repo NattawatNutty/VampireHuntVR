@@ -17,13 +17,13 @@ public class MenuUI : MonoBehaviour {
 
     // Variable part //
     private float rayWidth = 0.01f;                                             // The width of the ray
-    private float lineDistance = 20f;
+    private float lineDistance = 20f;                                           // Distance of the raycase
     public LineRenderer ray;                                                    // LineRenderer component
     public GameObject raySelect;                                                // LineRenderer for casting the ray
     public float grabRange = 50f;                                               // The range of the ray
     public Hand hand;                                                           // The hand this script attached to
-    public bool gameplayMode;
-    public bool isPause = false;
+    public bool gameplayMode;                                                   // Does the player enter the game mode?
+    public bool isPause = false;                                                // Has the player entered pause menu?
 
     public GameObject hitObject;                                                // The game object that the raycast from the controller hit
     public GameObject button;                                                   // The button that the raycast hit
@@ -44,14 +44,8 @@ public class MenuUI : MonoBehaviour {
         {
             hand = this.GetComponent<Hand>();                                   // Get the Hand component
         }
- 
-        Scene scene = SceneManager.GetActiveScene();
-        if(scene.name == "Village") {
-            gameplayMode = true;
-        } else {
-            gameplayMode = false;
-        }
 
+        // If the player is in game
         if (gameplayMode) {
             // Enable the scripts involving with the gameplay
             hand.GetComponent<SelectWeapon>().enabled = true;

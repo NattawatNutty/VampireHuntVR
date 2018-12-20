@@ -12,8 +12,13 @@ public class Shooter : MonoBehaviour
     // Attach this script to right hand VR controller
 
     // Variable part //
+    private float rayWidth = 0.01f;                                             // The width of the ray
+    private float lineDistance = 20f;                                           // Distance of the raycase
+    private float lastShot = 1f;                                                // The last shot of the weapon for fire rate counting (1 second for delay)
+
     public Hand hand;
-    private float lastShot = 0f;                                                // The last shot of the weapon for fire rate counting
+    public GameObject raySelect;
+    public GameObject weapon;
 
 	void Start () {
         if (hand == null)
@@ -29,7 +34,7 @@ public class Shooter : MonoBehaviour
         if (GetComponent<SelectWeapon>().isAttached)
         {
             // Get weapon information
-            GameObject weapon = GetComponent<SelectWeapon>().weapon;
+            weapon = GetComponent<SelectWeapon>().weapon;
             Weapon weaponInfo = weapon.GetComponent<Weapon>();
 
             // When the player runs out of ammo, notify to release current weapon
@@ -56,5 +61,14 @@ public class Shooter : MonoBehaviour
     public bool getShootTrigger()
     {
         return SteamVR_Input._default.inActions.Shoot.GetState(hand.handType);
+    }
+
+    public void RaycaseHandler() {
+        // Set the ray casting from weapon
+        LineRenderer ray = raySelect.GetComponent<LineRenderer>();
+        ray.startWidth = rayWidth;
+        ray.endWidth = rayWidth;
+        ray.SetPosition(0, weapon.transform.position);
+        ray.SetPosition(1, weapon.transform.position + weapon.transform.forward * lineDistance);
     }
 }

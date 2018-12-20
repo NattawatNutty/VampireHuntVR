@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour {
     // Attach this script to bullet (must have weapon as the parent)
 
     // Variable part //
-    public bool isHit = false;                  // Check whether the bullet hit something
+    public bool isHit = false;                  // Does the bullet hit something ?
     public Weapon weaponInfo;                   // Weapon information
     public int damage;                          // Damage of each bullet
 
@@ -18,6 +18,7 @@ public class Bullet : MonoBehaviour {
     void Start () {
         tag = "Bullet";
 
+        // Get the parent component (weapon)
         if(transform.parent != null) {
             weaponInfo = transform.parent.GetComponent<Weapon>();
             damage = weaponInfo.damage;         // Pass the damage value from the weapon
@@ -25,6 +26,7 @@ public class Bullet : MonoBehaviour {
         }
     }
 
+    // When the bullet collides with something
     private void OnCollisionEnter(Collision collision) {
         // Get the game object that the bullet hits
         GameObject target = collision.gameObject;
@@ -36,16 +38,18 @@ public class Bullet : MonoBehaviour {
             // if the enemy is still alive, decrease the current HP
             if(enemyInfo.currentHP > 0) {
                 enemyInfo.currentHP -= damage;
-                isHit = true;
                 enemyInfo.isHurt = true;
             }
         }
-        // When bullet hits other things or hits the same enemy again (bouncing), the damage will be null
-        else if (target.tag != "Enemy" && isHit) {
+        // When bullet hits other things or hits the same enemy again (bouncing/lying on the ground), the damage will be null
+        else if (target.tag != "Enemy" || isHit) {
             damage = 0;
         }
+
+        isHit = true;
     }
 
+    // When the bullet stops collision with something
     private void OnCollisionExit(Collision collision) {
         // Get the game object that the bullet just hit
         GameObject target = collision.gameObject;
