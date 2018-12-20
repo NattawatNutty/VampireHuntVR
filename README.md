@@ -7,5 +7,5 @@ In this game the user will become a hunter for killing vampire in village.
 
 ## Interaction Plan (in progress)
 - Menu = Simple raycasting
-- Selecting objects = HOMER technique
+- Selecting objects = Simple Raycasting and HOMER technique (interachangable)
 - Navigation = Touch-based navigation on touchpad
