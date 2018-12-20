@@ -20,7 +20,7 @@ public class MenuUI : MonoBehaviour {
     public LineRenderer raySelect;                                              // LineRenderer for casting the ray
     public float grabRange = 50f;                                               // The range of the ray
     public Hand hand;                                                           // The hand this script attached to
-    public static bool gameplayMode = false;
+    public bool gameplayMode;
     public bool isPause = false;
 
     public GameObject hitObject;                                                // The game object that the raycast from the controller hit
@@ -29,6 +29,7 @@ public class MenuUI : MonoBehaviour {
     public GameObject startMenu;                                                // Start menu UI canvas
     public GameObject optionMenu;                                               // Option menu UI canvas
     public GameObject pauseMenu;                                                // Pause menu while playing the game
+    public GameObject quitToEnterGameMenu;
     public GameObject playerUI;
 
     private string homerTech = "HOMER Technique";
@@ -40,6 +41,13 @@ public class MenuUI : MonoBehaviour {
         if (hand == null)
         {
             hand = this.GetComponent<Hand>();                                   // Get the Hand component
+        }
+ 
+        Scene scene = SceneManager.GetActiveScene();
+        if(scene.name == "Village") {
+            gameplayMode = true;
+        } else {
+            gameplayMode = false;
         }
 
         if (gameplayMode) {
@@ -61,10 +69,10 @@ public class MenuUI : MonoBehaviour {
 
         techniqueText.text = homerTech;
         raySelect.enabled = false;
+        Time.timeScale = 0;
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    private void Update() {
         // Handle raycast laser for the menu UI
         RayCastHandler();
 
@@ -79,8 +87,8 @@ public class MenuUI : MonoBehaviour {
             hand.GetComponent<Shooter>().enabled = false;
 
             playerUI.SetActive(false);
-        }
-        else if (GetPauseDown() && isPause) {
+            Time.timeScale = 0;
+        } else if (GetPauseDown() && isPause) {
             ResumeGame();
         }
 
@@ -93,6 +101,7 @@ public class MenuUI : MonoBehaviour {
             // Proceed to play tutorial
             else if (GetInteractUIDown() && button.name == "Play tutorial") {
                 startMenu.SetActive(false);
+                quitToEnterGameMenu.SetActive(true);
                 gameplayMode = true;
 
                 // Enable the scripts involving with the gameplay
@@ -101,14 +110,14 @@ public class MenuUI : MonoBehaviour {
                 hand.GetComponent<Shooter>().enabled = true;
 
                 playerUI.SetActive(true);
+                Time.timeScale = 1;
             }
             // Proceed to the village scene
-            else if (GetInteractUIDown() && button.name == "Skip") {
+            else if (GetInteractUIDown() && (button.name == "Skip" || button.name == "Enter Game")) {
                 startMenu.SetActive(false);
                 gameplayMode = true;
-                SceneManager.LoadScene("Village");
-            }
-            else if (GetInteractUIDown() && button.name == "Resume" && isPause) {
+                Time.timeScale = 1;
+            } else if (GetInteractUIDown() && button.name == "Resume" && isPause) {
                 ResumeGame();
             }
             // Select 'Option' menu from main menu
@@ -127,8 +136,7 @@ public class MenuUI : MonoBehaviour {
                     techniqueText.text = simRayCastTech;
                     hand.GetComponent<SelectWeapon>().isHOMER = false;
                     hand.GetComponent<SelectWeapon>().isSimRaycast = true;
-                }
-                else if (hand.GetComponent<SelectWeapon>().isSimRaycast) {
+                } else if (hand.GetComponent<SelectWeapon>().isSimRaycast) {
                     techniqueText.text = homerTech;
                     hand.GetComponent<SelectWeapon>().isHOMER = true;
                     hand.GetComponent<SelectWeapon>().isSimRaycast = false;
@@ -151,6 +159,10 @@ public class MenuUI : MonoBehaviour {
         }
     }
 
+    private void FixedUpdate () {
+        
+    }
+
     // Handle raycast events on the button of the menu
     public void RayCastHandler() {
         RaycastHit hitInfo;                                                     // Information of the object hit by the raycast
@@ -163,7 +175,7 @@ public class MenuUI : MonoBehaviour {
             // Get the game object that hit by the raycast
             hitObject = hitInfo.collider.gameObject;
             // If hit object is the button named Cube i.e. button
-            if (hitObject.name == "Cube") {
+            if (hitObject.name == "Cube" && !hand.GetComponent<SelectWeapon>().isAttached) {
                 button = hitObject.transform.parent.gameObject;                 // Pass button object reference
                 float lineDistance = Vector3.Distance(transform.position, hitObject.transform.position);
 
@@ -205,5 +217,6 @@ public class MenuUI : MonoBehaviour {
         hand.GetComponent<Shooter>().enabled = true;
 
         playerUI.SetActive(true);
+        Time.timeScale = 1;
     }
 }

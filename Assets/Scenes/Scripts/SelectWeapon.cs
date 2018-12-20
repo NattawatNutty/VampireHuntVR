@@ -58,8 +58,6 @@ public class SelectWeapon : MonoBehaviour
         // If the raycast hits something
         if (hit)
         {
-            //Debug.Log("Hit");
-
             // If the raycast hit the weapon
             if (hitInfo.collider.gameObject.tag == "Weapon" && hitInfo.collider.gameObject.GetComponent<Weapon>().isPickable)
             {
