@@ -17,7 +17,9 @@ public class MenuUI : MonoBehaviour {
 
     // Variable part //
     private float rayWidth = 0.01f;                                             // The width of the ray
-    public LineRenderer raySelect;                                              // LineRenderer for casting the ray
+    private float lineDistance = 20f;
+    public LineRenderer ray;                                                    // LineRenderer component
+    public GameObject raySelect;                                                // LineRenderer for casting the ray
     public float grabRange = 50f;                                               // The range of the ray
     public Hand hand;                                                           // The hand this script attached to
     public bool gameplayMode;
@@ -68,7 +70,6 @@ public class MenuUI : MonoBehaviour {
         }
 
         techniqueText.text = homerTech;
-        raySelect.enabled = false;
         Time.timeScale = 0;
     }
 
@@ -159,12 +160,25 @@ public class MenuUI : MonoBehaviour {
         }
     }
 
-    private void FixedUpdate () {
-        
-    }
-
     // Handle raycast events on the button of the menu
     public void RayCastHandler() {
+        // Set the ray casting from the controller to the weapon
+        LineRenderer ray = raySelect.GetComponent<LineRenderer>();
+        ray.startWidth = rayWidth;
+        ray.endWidth = rayWidth;
+        ray.SetPosition(0, transform.position);
+        ray.SetPosition(1, transform.position + transform.forward * lineDistance);
+
+        if (!isPause && !gameplayMode) {
+            raySelect.SetActive(true);
+        }
+        else if (isPause && gameplayMode) {
+            raySelect.SetActive(true);
+        }
+        else if (!isPause && gameplayMode) {
+            raySelect.SetActive(false);
+        }
+
         RaycastHit hitInfo;                                                     // Information of the object hit by the raycast
         
         // Player press the trigger to select UI
@@ -177,23 +191,13 @@ public class MenuUI : MonoBehaviour {
             // If hit object is the button named Cube i.e. button
             if (hitObject.name == "Cube" && !hand.GetComponent<SelectWeapon>().isAttached) {
                 button = hitObject.transform.parent.gameObject;                 // Pass button object reference
-                float lineDistance = Vector3.Distance(transform.position, hitObject.transform.position);
-
-                // Set the ray casting from the controller to the weapon
-                raySelect.enabled = true;
-                raySelect.startWidth = rayWidth;
-                raySelect.endWidth = rayWidth;
-                raySelect.SetPosition(0, transform.position);
-                raySelect.SetPosition(1, transform.position + transform.forward * lineDistance);
             } else {
                 // Clear the reference
-                raySelect.enabled = false;
                 button = null;
                 hitObject = null;
             }
         } else {
             // Clear the reference
-            raySelect.enabled = false;
             button = null;
             hitObject = null;
         }

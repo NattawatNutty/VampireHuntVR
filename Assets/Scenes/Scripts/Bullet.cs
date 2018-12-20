@@ -24,13 +24,8 @@ public class Bullet : MonoBehaviour {
             gameObject.SetActive(false);
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-    }
-
-    private IEnumerator OnCollisionEnter(Collision collision) {
+    private void OnCollisionEnter(Collision collision) {
         // Get the game object that the bullet hits
         GameObject target = collision.gameObject;
 
@@ -41,16 +36,24 @@ public class Bullet : MonoBehaviour {
             // if the enemy is still alive, decrease the current HP
             if(enemyInfo.currentHP > 0) {
                 enemyInfo.currentHP -= damage;
-                enemyInfo.GetComponent<Renderer>().material.color = Color.red;
-                yield return new WaitForSeconds(.3f);
-                enemyInfo.GetComponent<Renderer>().material.color = Color.white;
                 isHit = true;
+                enemyInfo.isHurt = true;
             }
         }
         // When bullet hits other things or hits the same enemy again (bouncing), the damage will be null
         else if (target.tag != "Enemy" && isHit) {
             damage = 0;
-            
+        }
+    }
+
+    private void OnCollisionExit(Collision collision) {
+        // Get the game object that the bullet just hit
+        GameObject target = collision.gameObject;
+
+        if (target.tag == "Enemy") {
+            // Get enemy information
+            Enemy enemyInfo = target.GetComponent<Enemy>();
+            enemyInfo.isHurt = false;
         }
     }
 }

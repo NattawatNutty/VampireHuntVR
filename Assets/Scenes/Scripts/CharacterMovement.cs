@@ -42,8 +42,9 @@ public class CharacterMovement : MonoBehaviour {
         // Get the rotation of the player (which direction the player is looking)
         //Quaternion rotationCam = playerCam.transform.rotation;
         //Vector3 targetDir = player.transform.TransformDirection(movement);
-        player.transform.rotation = Quaternion.FromToRotation(player.transform.forward, playerCam.transform.forward);
+        //player.transform.rotation = Quaternion.FromToRotation(player.transform.forward, playerCam.transform.forward);
+        player.transform.rotation = Quaternion.LookRotation(player.transform.forward);
 
-        //player.transform.position += movement;                                  // Change the position of the player according to the touch pad position
+        player.transform.position += movement;                                  // Change the position of the player according to the touch pad position
     }
 }

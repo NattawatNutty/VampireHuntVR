@@ -13,7 +13,12 @@ public class Enemy : MonoBehaviour
     public int currentHP;                   // Current HP of the enemy
     public float speed = 1.75f;             // Movement speed of the enemy (default: 1.75)
     public int damage;                      // Damage dealt to the player
-    public Material hurt;                   // Material when the enemy hurts
+    public bool isHurt;
+
+    public Material hurtMaterial;           // Hurt material
+    public Material deadMaterial;           // Dead material
+    public Material normalMaterial;         // Normal material
+
     public Transform player;
 
     // Use this for initialization
@@ -28,9 +33,16 @@ public class Enemy : MonoBehaviour
         agent.destination = player.position;
         agent.speed = speed;
 
+        if (isHurt) {
+            GetComponentInChildren<MeshRenderer>().material = hurtMaterial;
+        }
+        else {
+            GetComponentInChildren<MeshRenderer>().material = normalMaterial;
+        }
+
         if (currentHP <= 0) {
             agent.speed = 0;
-            GetComponent<Renderer>().material.color = Color.black;
+            GetComponentInChildren<MeshRenderer>().material = deadMaterial;
             Destroy(gameObject, 2);
         }
 	}
