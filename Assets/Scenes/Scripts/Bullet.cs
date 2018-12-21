@@ -39,25 +39,14 @@ public class Bullet : MonoBehaviour {
             if(enemyInfo.currentHP > 0) {
                 enemyInfo.currentHP -= damage;
                 enemyInfo.isHurt = true;
+                enemyInfo.lastHit = Time.time;
             }
         }
         // When bullet hits other things or hits the same enemy again (bouncing/lying on the ground), the damage will be null
-        else if (target.tag != "Enemy" || isHit) {
+        else if (target.tag != "Enemy" && isHit) {
             damage = 0;
         }
 
         isHit = true;
-    }
-
-    // When the bullet stops collision with something
-    private void OnCollisionExit(Collision collision) {
-        // Get the game object that the bullet just hit
-        GameObject target = collision.gameObject;
-
-        if (target.tag == "Enemy") {
-            // Get enemy information
-            Enemy enemyInfo = target.GetComponent<Enemy>();
-            enemyInfo.isHurt = false;
-        }
     }
 }

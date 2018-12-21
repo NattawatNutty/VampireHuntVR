@@ -45,7 +45,6 @@ public class Weapon : MonoBehaviour
             GetComponent<MeshRenderer>().material = normalMaterial;
         }
 
-
         if (remainingAmmo <= 0) {
             isPickable = false;
         }
